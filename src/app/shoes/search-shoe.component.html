@@ -1,0 +1,106 @@
+<div class='panel panel-primary'>
+  <div class='panel-heading'>
+    {{pageTitle}}
+  </div>
+  <div class='panel-body'>
+    <form [formGroup]="shoeForm" (ngSubmit)="searchShoeOnSubmit()">
+      <div class='row'>
+          <div class='col-md-6'>
+            <div class='row'>
+              <div class='col-md-3'>Id:</div>
+              <div class='col-md-3'>
+                  <input formControlName="id"/>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='col-md-3'>Article Number:</div>
+              <div class='col-md-6'>
+                  <input formControlName="articleNumber"/>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='col-md-3'>Name:</div>
+              <div class='col-md-6'>
+                  <input formControlName="name"/>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='col-md-3'>Brand:</div>
+              <div class='col-md-6'>
+                  <input formControlName="brand"/>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='col-md-3'>Color:</div>
+              <div class='col-md-6'>
+                  <input formControlName="color"/>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='col-md-3'>Size:</div>
+              <div class='col-md-6'>
+                  <input type= "number" formControlName="size"/>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='col-md-3'>Stock:</div>
+              <div class='col-md-6'>
+                  <input type= "number" formControlName="stock"/>
+              </div>
+            </div>
+            <br>
+            <div class='col-md-4'>
+              <button class='btn btn-primary'>
+                  Search
+              </button>
+            </div>
+        </div>
+      </div>
+    </form>
+    <div *ngIf="statusCode;">
+      <div *ngIf="statusCode === 400" [ngClass] = "'error'">
+          Bad Request
+      </div>
+      <div *ngIf="statusCode === 404" [ngClass] = "'error'">
+          Page Not Found
+      </div>
+      <div *ngIf="statusCode === 500" [ngClass] = "'error'">
+          Internal Server Error.
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class='table-responsive'>
+      <table class='table' *ngIf='shoes && shoes.length'>
+          <thead>
+              <tr>
+                  <th>Id</th>
+                  <th>ArticleNumber</th>
+                  <th>Name</th>
+                  <th>Brand</th>
+                  <th>Color</th>
+                  <th>Size</th>
+                  <th>Stock</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor='let shoe of shoes'>
+                  <td>{{ shoe.id }}</td>
+                  <td>{{ shoe.articleNumber }}</td>
+                  <td>{{ shoe.name }}</td>
+                  <td>{{ shoe.brand }}</td>
+                  <td>{{ shoe.color }}</td>
+                  <td>{{ shoe.size }}</td>
+                  <td>{{ shoe.stock }}</td>
+              </tr> 
+          </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class='panel-footer'>
+      <a class='btn btn-default' (click)='onBack()' style='width:80px'>
+          <i class='glyphicon glyphicon-chevron-left'></i> Back
+      </a>
+  </div>
+</div>

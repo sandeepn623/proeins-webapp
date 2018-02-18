@@ -1,0 +1,36 @@
+h1 {
+    font-size: 2.0em;
+    margin: 20px 0 0 0;
+    font-weight: 400;   
+}
+h3 { 
+   color: blue;
+}
+table {
+    border-collapse: collapse;
+}
+table, th, td {
+    border: 1px solid black;
+    font-size:17px;
+}
+input {
+    width: 225px;
+    margin-bottom: 8px;
+    background-color: #ffffff;
+    font-size:17px;
+}
+button {
+    background-color: #337ab7;
+    color: white;
+}
+.error{
+    color: red;
+    font-size: 15px;
+}
+.success{
+    color: green;
+    font-size: 20px;
+}
+thead {
+    color: #337ab7
+}

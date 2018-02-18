@@ -1,0 +1,66 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        {{pageTitle}}
+    </div>
+    <div class='panel-body'>
+        <div class='row'>
+            <div class='col-md-4'>
+                <button class='btn btn-primary' [routerLink] = "['/shoes/create']">
+                        Add Shoes
+                </button>
+                <button class='btn btn-primary' [routerLink] = "['/shoes/search']">
+                        Search Shoes
+                </button>
+            </div>
+        </div>
+        <div *ngIf="statusCode;">
+            <div *ngIf="statusCode === 400" [ngClass] = "'error'">
+                Bad Request
+            </div>
+            <div *ngIf="statusCode === 404" [ngClass] = "'error'">
+                Page Not Found
+            </div>
+            <div *ngIf="statusCode === 500" [ngClass] = "'error'">
+                Internal Server Error.
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class='table-responsive'>
+            <table class='table' *ngIf='shoes && shoes.length'>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>ArticleNumber</th>
+                        <th>Name</th>
+                        <th>Brand</th>
+                        <th>Color</th>
+                        <th>Size</th>
+                        <th>Stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <tr *ngFor='let shoe of shoes'>
+                        <td>{{ shoe.id }}</td>
+                        <td>{{ shoe.articleNumber }}</td>
+                        <td>{{ shoe.name }}</td>
+                        <td>{{ shoe.brand }}</td>
+                        <td>{{ shoe.color }}</td>
+                        <td>{{ shoe.size }}</td>
+                        <td>{{ shoe.stock }}</td>
+                        <td>
+                            <button class='btn btn-primary' [routerLink] = "['/shoes/edit', shoe.id]">
+                                Edit
+                            </button>
+                        </td>
+                        <td>
+                            <button class='btn btn-primary' (click)="deleteShoe(shoe.id)">
+                                Delete
+                            </button>
+                        </td>
+                   </tr> 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

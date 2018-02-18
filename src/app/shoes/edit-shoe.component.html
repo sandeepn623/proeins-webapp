@@ -1,0 +1,82 @@
+<div class='panel panel-primary'>
+  <div class='panel-heading'>
+    {{pageTitle}}
+  </div>
+  <div class='panel-body'>
+        <div class="col-md-6">
+            <form (ngSubmit)="updateShoeOnSubmit()" #shoeForm="ngForm">
+                <div class='row'>
+                    <div class="form-group">
+                        <label for="name">ArticleNumber</label>
+                        <input type="text" class="form-control" id="articLeNumber" required [(ngModel)]="shoe.articleNumber" name="articleNumber" #articLeNumber="ngModel" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" required [(ngModel)]="shoe.name" name="name" #name="ngModel">
+                        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                            <div [hidden]="!name.hasError('required')">Name is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Brand</label>
+                        <input type="text" class="form-control" id="brand" required [(ngModel)]="shoe.brand" name="brand" pattern="[a-zA-Z][a-zA-Z ]+" #brand="ngModel">
+                        <div [hidden]="brand.valid || brand.pristine"class="alert alert-danger">
+                            <div [hidden]="!brand.hasError('required')">Brand is required</div>
+                            <div [hidden]="!brand.hasError('pattern')">Only alphabets Allowed</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Color</label>
+                        <input type="text" class="form-control" id="color" required [(ngModel)]="shoe.color" name="color" pattern="[a-zA-Z][a-zA-Z ]+" #color="ngModel">
+                        <div [hidden]="color.valid || color.pristine" class="alert alert-danger">
+                            <div [hidden]="!color.hasError('required')">Color is required</div>
+                            <div [hidden]="!color.hasError('pattern')">Only alphabets Allowed</div>
+                        </div> 
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Size</label>
+                        <input type="number" class="form-control" id="size" required [(ngModel)]="shoe.size" name="size" pattern="[0-9]*" #size="ngModel">
+                        <div [hidden]="size.valid || size.pristine" class="alert alert-danger">
+                            <div [hidden]="!size.hasError('required')">Size is required</div>
+                            <div [hidden]="!size.hasError('pattern')">Please Enter valid size</div>
+                        </div> 
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Stock</label>
+                        <input type="number" class="form-control" id="stock" required [(ngModel)]="shoe.stock" name="stock" pattern="[0-9]*" #stock="ngModel">
+                        <div [hidden]="stock.valid || stock.pristine" class="alert alert-danger">
+                            <div [hidden]="!stock.hasError('required')">Stock is required</div>
+                            <div [hidden]="!stock.hasError('pattern')">Please Enter valid stock</div>
+                        </div> 
+                    </div>
+                    <br>
+                    <div class='col-md-4'>
+                        <button class='btn btn-primary' [disabled]="!shoeForm.form.valid">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    <br/>
+    <div *ngIf="statusCode;">
+        <div *ngIf="statusCode === 400" [ngClass] = "'error'">
+            Bad Request
+        </div>
+        <div *ngIf="statusCode === 404" [ngClass] = "'error'">
+            Page Not Found
+        </div>
+        <div *ngIf="statusCode === 403" [ngClass] = "'error'">
+            Page Not Found
+        </div>
+        <div *ngIf="statusCode === 500" [ngClass] = "'error'">
+            Internal Server Error.
+        </div>
+    </div>
+  </div>
+  <div class='panel-footer'>
+      <a class='btn btn-default' (click)='onBack()' style='width:80px'>
+          <i class='glyphicon glyphicon-chevron-left'></i> Back
+      </a>
+  </div>
+</div>
